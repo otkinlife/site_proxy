@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -13,7 +12,6 @@ import (
 
 type RouteConfig struct {
 	Target string `json:"target"`
-	Port   int    `json:"port"`
 }
 
 type Config map[string]RouteConfig
@@ -67,7 +65,7 @@ func readConfig(filename string) (Config, error) {
 func handleRequest(config Config, w http.ResponseWriter, r *http.Request) {
 	for route, routeConfig := range config {
 		if strings.HasPrefix(r.URL.Path, route) {
-			proxyURL := fmt.Sprintf("%s:%d", routeConfig.Target, routeConfig.Port)
+			proxyURL := routeConfig.Target
 			originalPath := r.URL.Path
 			trimmedPath := strings.TrimPrefix(r.URL.Path, route)
 			if !strings.HasPrefix(trimmedPath, "/") {

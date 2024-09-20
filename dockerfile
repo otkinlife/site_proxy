@@ -1,5 +1,5 @@
 # 使用官方的 Go 镜像作为构建阶段
-FROM golang:1.20 AS builder
+FROM golang AS builder
 
 # 设置工作目录
 WORKDIR /build

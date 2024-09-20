@@ -14,7 +14,7 @@ RUN go mod download
 RUN go build -o proxy-server .
 
 # 使用一个更小的基础镜像来运行应用程序
-FROM alpine:latest
+FROM debian:latest
 
 # 设置工作目录
 WORKDIR /app
